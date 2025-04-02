@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+:root{
+  --cor-base: #ec9634;
+}
+
 body {
   font-size: 1em;
   font-family: "Trebuchet MS", "Helvetica", Arial, sans-serif;
@@ -11,7 +15,7 @@ body {
 }
 
 #area-cabecalho {
-  background-color: #f7b600;
+  background-color: var(--cor-base);
   padding: 15px;
   text-align: center;
 }
@@ -21,13 +25,28 @@ body {
   padding: 10px 35px;
 }
 
+#area-menu a{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#menu-toggle {
+    display: none; 
+    font-size: 1.8em;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+
 #area-principal {
-  width: 920px;
+  width: 1080px;
   margin: 0 auto;
 }
 
 #area-postagens {
-  width: 660px;
+  width: 75%;
   float: left;
   margin: 20px 0px;
 }
@@ -36,38 +55,78 @@ body {
   width: 240px;
   float: right;
   margin: 20px 0px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s;
+}
+
+#area-lateral.show {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .postagem {
   padding: 20px;
   margin-bottom: 20px;
   background: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.postagem.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.postagem p{
+  padding: 10px 0;
+}
+
+.postagem img{
+  width: 100%;
 }
 
 .conteudo-lateral {
   background: white;
   padding: 10px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.conteudo-lateral a{
+  padding: 5px 0;
 }
 
 .postagem-lateral {
   font-size: 0.8em;
-  padding: 5px;
+  padding: 8px;
   border-bottom: 1px dotted #ccc;
 }
 
+.postagem-lateral a{
+    padding: 5px 0;
+    display: flex;
+}
+
 #rodape {
-  clear: both;
-  background: #ccc;
-  text-align: center;
+  width: 100%;
+  background-color: var(--cor-base);
+  color: white;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
   padding: 15px;
   font-weight: 600;
 }
 
 .data-postagem {
   font-size: 0.8em;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  padding: 8px 0;
   display: block;
 }
 
@@ -81,7 +140,7 @@ h1 {
 }
 
 h2 {
-  color: #f7b600;
+  color: var(--cor-base);
 }
 
 h3 {
@@ -97,7 +156,7 @@ a {
 
 a:link,
 a:visited {
-  color: #f7b600;
+  color: var(--cor-base);
 }
 
 a:hover {
@@ -111,10 +170,92 @@ a:hover {
 }
 
 #area-cabecalho a:hover {
-  color: #f7b600;
+  color: var(--cor-base);
   background: white;
 }
 
 #area-cabecalho a:active {
   color: #4e4e4e;
+}
+
+@media screen and (max-width: 768px) {
+
+  #menu-toggle {
+    display: block;
+  }
+
+  #area-principal {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #area-cabecalho{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #area-menu{
+    display: none;
+    flex-direction: column;
+    background-color: var(--cor-base);
+    position: absolute;
+    top: 90px; 
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #area-menu a {
+    display: block;
+    padding: 10px;
+  }
+
+  #area-menu.show {
+    display: flex;
+    z-index: 10;
+    transform: translateY(0);
+  }
+
+  button#menu-toggle {
+    display: flex;
+    flex-direction: column;
+    right: 0;
+
+  }
+
+  #area-postagens {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .postagem{
+    width: 90%; 
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(220px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .postagem.visivel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .conteudo-lateral{
+    display: none;
+  }
+
 }
